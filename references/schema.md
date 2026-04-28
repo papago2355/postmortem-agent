@@ -42,7 +42,7 @@ The failure category. Used for filtering and analysis. Pick from:
 ### `confidence_failure_mode` (string, one sentence)
 **Why** you were sure you were right. This is the metacognitive payload — it's what makes the entry useful for future-you.
 
-Good: `"Silent empty results from Milvus looked like 'no matching docs' but actually meant 'connection failed because the agent used the Docker hostname from the host shell'."`
+Good: `"Silent empty results from a containerized vector store looked like 'no matching docs' but actually meant 'connection failed because the agent used the Docker hostname from the host shell'."`
 Bad: `"I was wrong."` (no information about the confidence failure)
 
 ### `canonical_correct_path` (string, one sentence)
