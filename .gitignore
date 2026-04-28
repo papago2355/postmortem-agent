@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.pytest_cache/
+.coverage
+.tox/
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Virtualenvs
+venv/
+.venv/
+env/
+
+# Local test artifacts
+/tmp/
+*.log
+
+# Hermes runtime artifacts (in case someone clones into ~/.hermes/skills/)
+sessions/
+memories/
+*.session.json
