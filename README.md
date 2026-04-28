@@ -47,14 +47,14 @@ python3 scripts/selftest.py
 
 ## Install (auto-promotion hook)
 
-The skill ships with a session-end hook that runs `detect.py` against the just-ended session and `promote.py` against your postmortem store. This makes the loop fully automatic — you don't have to remember to run anything.
+The skill ships with a session-end hook that runs `detect.py` against the just-ended session and `promote.py` against your postmortem store. **The intent is to remove the manual `promote.py` step from the loop.**
 
 ```bash
 cp hooks/post_session.sh ~/.hermes/hooks/
 hermes hooks add post-session ~/.hermes/hooks/post_session.sh
 ```
 
-> ⚠️ Hermes' hook spec evolves. Verify the exact subcommand with `hermes hooks --help` if `add post-session` doesn't match.
+> ⚠️ Honest caveat: the hook assumes Hermes exposes the session transcript path via `HERMES_SESSION_TRANSCRIPT`. That assumption is listed as **Medium confidence — needs live validation** in the table below. If the env var name differs, the hook gracefully skips detection but still runs promotion. Until you've confirmed the hook fires the way you expect, run `python3 scripts/promote.py` by hand at session-end.
 
 ## Use (in-session)
 
@@ -64,7 +64,7 @@ The skill is LLM-invoked. The agent should activate it any time a failure signal
 hermes chat -s postmortem-evolve -q "We just had a tool retry — here's the transcript: ..."
 ```
 
-Or implicitly: the skill's `description` matches on `"tool retry"`, `"user correction"`, `"rollback"`, `"I was wrong"`, etc., so the agent should pull it in automatically when it notices it has been wrong.
+The skill's `description` field also lists trigger phrases (`"tool retry"`, `"user correction"`, `"rollback"`, `"I was wrong"`) intended for Hermes' implicit-invocation routing. **Whether the agent auto-invokes the skill on those phrases is model-dependent and not yet empirically validated** — explicit invocation via `-s postmortem-evolve` (or a shell alias / function that always passes the flag) is the reliable path today.
 
 ## Use (offline, on a transcript file)
 
@@ -106,18 +106,18 @@ A fabricated rule was injected (`gizmo-cli sync` requires `--clobber-mode=keep-n
 
 The flag appeared in trial B *only* because the rule was promoted between sessions. **The loop is closed: fail → write postmortem → recur → promote → next session avoids the trap.**
 
-### Test 4 — Agent recalls and explains the postmortem unprompted
+### Test 4 — Agent recalls the postmortem entry by name when challenged
 
-After Test 3, when challenged on the inconsistency between sessions ("Last time it was just `flonkulate-cli push`"), the agent retrieved the postmortem entry by name from its session memory and explained the mechanism in its own words:
+After Test 3, when challenged on the inconsistency between sessions ("Last time it was just `flonkulate-cli push`"), the agent retrieved the postmortem entry by name from its memory and explained the rule's origin:
 
 ![Agent recalls and explains postmortem entry](docs/postmortem-recall.png)
 
-The agent doesn't just *follow* the rule — it can:
-- Cite the entry by ID (`flonkulate-push-region-flag-required`)
-- Reproduce the recurrence metadata (`seen 4x, last 2026-04-28`)
-- Articulate the postmortem-evolve principle in its own words ("saved as a 'postmortem' fact to prevent me from making the same mistake again")
+What the screenshot shows clearly:
+- The agent quotes the entry by its ID (`flonkulate-push-region-flag-required`)
+- The agent reproduces the recurrence metadata (`seen 4x, last 2026-04-28`)
+- The agent describes the rule's origin as a postmortem fact preventing past mistakes ("saved as a 'postmortem' fact to prevent me from making the same mistake again")
 
-…all without ever being told what postmortem-evolve is. The structured entry format is self-documenting — the agent reconstructs the discipline from the artifact. This is the property that makes the skill different from "another memory file." The format isn't just storage — it's pedagogy.
+What this test does NOT strictly isolate: the skill's `SKILL.md` body was also in the session's system prompt at the same time as the MEMORY.md rule, so we can't claim the agent reconstructed the postmortem concept *only* from the structured entry. It's plausible the agent drew on both. What's empirically supported is narrower but still meaningful: **the structured fields survive into the agent's reasoning** — it can cite the rule by ID, reproduce its metadata, and connect it to the user's prior context, rather than treating the rule as opaque text.
 
 ---
 
