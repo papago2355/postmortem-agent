@@ -27,6 +27,21 @@ Verified empirically — see [Evidence](#evidence) below.
 
 ---
 
+## ⚠️ Current behavior: aggressive auto-injection by default
+
+v0.1.0 auto-injects promoted postmortem rules into `MEMORY.md` aggressively — `recurrence_count >= 3` writes the rule straight into the system prompt for the next session, **with no human review gate.** This is a deliberate choice for v0.1.0 (lower friction, faster compounding), but the risks are real:
+
+- Detection false positives can promote wrong rules
+- Rule drift — a rule that was right at promotion time can be wrong months later
+- Echo-chamber reinforcement — the agent reads its own postmortems, future failures get shaped by prior rules, which generates more confirming entries
+- Accountability vacuum — when the agent follows a wrong promoted rule, no human signed off on it
+
+**Work in progress: configurable aggressiveness levels** (`conservative` / `moderate` / `aggressive`) keyed to user preference. The `conservative` tier will require explicit human confirmation before any rule lands in `MEMORY.md`; `moderate` will become the new default with a higher recurrence threshold and a precision-floor on detection signals; `aggressive` will preserve the current v0.1.0 behavior for users who want it.
+
+Until v0.2.0 ships, **treat this as a research / personal-use tool.** Inspect what `promote.py` writes to `MEMORY.md` before relying on it for team or production work.
+
+---
+
 ## Install
 
 ```bash
