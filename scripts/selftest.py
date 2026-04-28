@@ -85,7 +85,7 @@ def test_promote_with_recurring_pattern() -> None:
             pattern: host-vs-docker-env-silent-empty-results
             kind: env-config
             confidence_failure_mode: Silent empty results looked like missing data; was a connection issue.
-            canonical_correct_path: Prefix host-side Python with MILVUS_HOST=localhost.
+            canonical_correct_path: Prefix host-side Python with DB_HOST=localhost.
             resolution: param-fix
             first_seen: 2026-04-10
             last_seen: 2026-04-22
@@ -120,7 +120,7 @@ def test_promote_with_recurring_pattern() -> None:
             _fail("promoted line written to MEMORY.md", memory_text)
         if "host-vs-docker-env-silent-empty-results" not in memory_text:
             _fail("pattern name in promoted line", memory_text)
-        if "MILVUS_HOST=localhost" not in memory_text:
+        if "DB_HOST=localhost" not in memory_text:
             _fail("canonical path in promoted line", memory_text)
         _ok("MEMORY.md contains the promoted rule")
 

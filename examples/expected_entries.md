@@ -40,7 +40,7 @@ When `scripts/detect.py --input examples/sample_session.json` runs, it should pr
 pattern: host-vs-docker-env-silent-empty-results
 kind: env-config
 confidence_failure_mode: Search returned 0 results from a host-side call; agent assumed the data was missing rather than the connection was wrong because no error was raised.
-canonical_correct_path: For host-side scripts that talk to containerized infra, prefix with the localhost-overriding env vars (e.g. MILVUS_HOST=localhost). Tool descriptions should mention this pre-flight requirement.
+canonical_correct_path: For host-side scripts that talk to containerized infra, prefix with the localhost-overriding env vars (e.g. DB_HOST=localhost). Tool descriptions should mention this pre-flight requirement.
 resolution: param-fix
 first_seen: 2026-04-28
 last_seen: 2026-04-28

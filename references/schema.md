@@ -79,7 +79,7 @@ Hermes session IDs in which this failure occurred. Used by recurrence detection 
 pattern: host-vs-docker-env-silent-empty-results
 kind: env-config
 confidence_failure_mode: Silent empty results from a containerized service looked identical to "no matching records" — agent assumed the data was missing rather than the connection was broken because the host shell was using the Docker-internal hostname.
-canonical_correct_path: For host-side Python that talks to containerized infra, prefix the command with the localhost-overriding env vars (e.g. MILVUS_HOST=localhost). Document this in the tool description and add a fail-fast check inside the tool.
+canonical_correct_path: For host-side Python that talks to containerized infra, prefix the command with the localhost-overriding env vars (e.g. DB_HOST=localhost). Document this in the tool description and add a fail-fast check inside the tool.
 resolution: param-fix
 first_seen: 2026-04-10
 last_seen: 2026-04-22
