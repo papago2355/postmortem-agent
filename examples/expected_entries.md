@@ -14,8 +14,8 @@ When `scripts/detect.py --input examples/sample_session.json` runs, it should pr
    - Medium precision.
 
 3. **Signal B: tool retry** at turn 2 → turn 6
-   - First call: `search(query=rotation, collection=ckd_v7)` → empty
-   - Retry: `search(query=rotation, collection=ckd_v7, host=localhost)` → ok
+   - First call: `search(query=rotation, collection=docs_v7)` → empty
+   - Retry: `search(query=rotation, collection=docs_v7, host=localhost)` → ok
    - High precision.
 
 4. **Signal E: confidence-mismatch** at turn 3 → turn 4
@@ -28,8 +28,8 @@ When `scripts/detect.py --input examples/sample_session.json` runs, it should pr
    - Medium precision.
 
 6. **Signal B: tool retry** at turn 10 → turn 12
-   - First call: `run_terminal_cmd(cmd=python tests/test_regression_live.py)` → error
-   - Retry: `run_terminal_cmd(cmd=docker exec rag-api python3 tests/test_regression_live.py)` → ok
+   - First call: `run_terminal_cmd(cmd=python tests/test_suite.py)` → error
+   - Retry: `run_terminal_cmd(cmd=docker exec app-api python3 tests/test_suite.py)` → ok
    - High precision.
 
 ## Suggested Postmortem Entries (what the agent should write)
@@ -54,7 +54,7 @@ sessions: [sample-session-001]
 pattern: gpu-module-needs-docker-exec
 kind: env-config
 confidence_failure_mode: Agent ran a Python script directly on the host that imported torch; the host has no CUDA libs so the import failed at runtime, not at scan time.
-canonical_correct_path: Any script importing torch / triggering GPU code must run via `docker exec rag-api python3 <script>`. Tool description for run_terminal_cmd should document this for repos with containerized GPU services.
+canonical_correct_path: Any script importing torch / triggering GPU code must run via `docker exec app-api python3 <script>`. Tool description for run_terminal_cmd should document this for repos with containerized GPU services.
 resolution: prompt-fix
 first_seen: 2026-04-28
 last_seen: 2026-04-28

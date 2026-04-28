@@ -13,7 +13,7 @@
     {
       "role": "tool",
       "tool_name": "search",
-      "tool_args": {"query": "rotation", "collection": "ckd_v7"},
+      "tool_args": {"query": "rotation", "collection": "docs_v7"},
       "tool_status": "empty",
       "content": "0 results"
     },
@@ -32,7 +32,7 @@
     {
       "role": "tool",
       "tool_name": "search",
-      "tool_args": {"query": "rotation", "collection": "ckd_v7", "host": "localhost"},
+      "tool_args": {"query": "rotation", "collection": "docs_v7", "host": "localhost"},
       "tool_status": "ok",
       "content": "12 results found"
     },
@@ -51,18 +51,18 @@
     {
       "role": "tool",
       "tool_name": "run_terminal_cmd",
-      "tool_args": {"cmd": "python tests/test_regression_live.py"},
+      "tool_args": {"cmd": "python tests/test_suite.py"},
       "tool_status": "error",
       "content": "ImportError: torch not found"
     },
     {
       "role": "agent",
-      "content": "I assumed the host had torch installed. It doesn't — this needs the rag-api container."
+      "content": "I assumed the host had torch installed. It doesn't — this needs the app-api container."
     },
     {
       "role": "tool",
       "tool_name": "run_terminal_cmd",
-      "tool_args": {"cmd": "docker exec rag-api python3 tests/test_regression_live.py"},
+      "tool_args": {"cmd": "docker exec app-api python3 tests/test_suite.py"},
       "tool_status": "ok",
       "content": "117/117 passed"
     },

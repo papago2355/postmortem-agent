@@ -48,7 +48,7 @@ Bad: `"I was wrong."` (no information about the confidence failure)
 ### `canonical_correct_path` (string, one sentence)
 The verified correct action. Should be specific enough that a future invocation can copy-paste the fix.
 
-Good: `"Prefix host-side Python with MILVUS_HOST=localhost OLLAMA_HOST=http://localhost:11434."`
+Good: `"For host-side scripts that talk to a containerized service, prefix with the localhost-overriding env var (e.g. DB_HOST=localhost). Document this in the tool description so the agent doesn't have to rediscover it."`
 Bad: `"Use the right env vars."`
 
 ### `resolution` (enum)

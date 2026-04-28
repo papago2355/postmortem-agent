@@ -156,10 +156,10 @@ The hook spec is the weakest assumption; if the env var name differs, the hook s
 
 ## Origins
 
-The pattern was extracted from a year of running a production agent (a Korean pharmaceutical SOP RAG system) on Claude. The host repo carries a hand-curated `MAIN_CODING_INSTRUCTION.md` — every entry is a regression where the agent was confidently wrong, plus the canonical correct path. This skill automates that discipline.
+The pattern was extracted from a year of running a production RAG agent in a regulated industry. The host project carries a hand-curated guardrails memo — every entry is a regression where the agent was confidently wrong, plus the canonical correct path. This skill generalizes and automates that discipline.
 
 Specifically:
-- Investigation order rule — generalized from a "Bug Fixes: Code vs. Prompt/Param/Tool Gaps" section in the host project's CLAUDE.md
-- Signal taxonomy — distilled from feedback memory entries written across ~6 months of failure incidents
+- Investigation order rule — generalized from a "Bug Fixes: Code vs. Prompt/Param/Tool Gaps" reasoning section in the host project's agent-instruction file
+- Signal taxonomy — distilled from feedback notes written across ~6 months of failure incidents
 
 License: MIT.

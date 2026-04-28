@@ -17,7 +17,7 @@ This is the opposite of how engineers actually grow. We don't grow by filing awa
 
 ## The intuition
 
-When you run an agent in production for any length of time, you watch it make the **same kind of mistake repeatedly across sessions**. The model is the same. Its "context" is the same. Its tools are the same. And yet, week after week, it walks into the same trap.
+When you run an agent in production for any length of time, you watch it make the **same kind of mistake repeatedly across sessions**. The model is the same. Its context is the same. Its tools are the same. And yet, week after week, it walks into the same trap.
 
 That's not a model-quality problem. It's a memory-discipline problem.
 

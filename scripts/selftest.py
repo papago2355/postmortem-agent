@@ -96,7 +96,7 @@ def test_promote_with_recurring_pattern() -> None:
             pattern: gpu-module-needs-docker-exec
             kind: env-config
             confidence_failure_mode: Agent ran torch script on host that lacks CUDA.
-            canonical_correct_path: Run via docker exec rag-api python3.
+            canonical_correct_path: Run via docker exec app-api python3.
             resolution: prompt-fix
             first_seen: 2026-04-15
             last_seen: 2026-04-22
