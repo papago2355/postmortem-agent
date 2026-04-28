@@ -74,6 +74,16 @@ Identical model. Identical prompt. Identical tools. The only difference: the pos
 
 That's the loop closing.
 
+### …and the agent doesn't just follow the rule, it understands it
+
+When the same test was challenged across sessions ("Last time you gave a different answer"), the agent retrieved the postmortem entry by name from its persistent memory and explained the mechanism unprompted:
+
+![Agent recalls and explains the postmortem entry from its persistent memory](docs/postmortem-recall.png)
+
+The agent cited the entry by its ID (`flonkulate-push-region-flag-required`), reproduced the recurrence metadata (`seen 4x, last 2026-04-28`), and articulated the postmortem-evolve principle in its own words — *"saved as a 'postmortem' fact to prevent me from making the same mistake again"* — without ever having been told what postmortem-evolve is.
+
+This is the property that makes the skill different from "another memory file." The structured entry format isn't just storage — it's pedagogy. The agent reads its own postmortems and reconstructs the discipline from the artifact.
+
 ## What this is *not*
 
 - **Not a substitute for `systematic-debugging`** — that skill is for debugging *user code*. This skill is for debugging *the agent's own behavior*.

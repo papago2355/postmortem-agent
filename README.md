@@ -106,6 +106,19 @@ A fabricated rule was injected (`gizmo-cli sync` requires `--clobber-mode=keep-n
 
 The flag appeared in trial B *only* because the rule was promoted between sessions. **The loop is closed: fail → write postmortem → recur → promote → next session avoids the trap.**
 
+### Test 4 — Agent recalls and explains the postmortem unprompted
+
+After Test 3, when challenged on the inconsistency between sessions ("Last time it was just `flonkulate-cli push`"), the agent retrieved the postmortem entry by name from its session memory and explained the mechanism in its own words:
+
+![Agent recalls and explains postmortem entry](docs/postmortem-recall.png)
+
+The agent doesn't just *follow* the rule — it can:
+- Cite the entry by ID (`flonkulate-push-region-flag-required`)
+- Reproduce the recurrence metadata (`seen 4x, last 2026-04-28`)
+- Articulate the postmortem-evolve principle in its own words ("saved as a 'postmortem' fact to prevent me from making the same mistake again")
+
+…all without ever being told what postmortem-evolve is. The structured entry format is self-documenting — the agent reconstructs the discipline from the artifact. This is the property that makes the skill different from "another memory file." The format isn't just storage — it's pedagogy.
+
 ---
 
 ## File Layout
